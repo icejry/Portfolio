@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jirayu – Portfolio for University</title>
+  <meta name="description"
+    content="Portfolio เว็บไซต์สำหรับยื่นเข้ามหาวิทยาลัย – คณะวิศวกรรมศาสตร์ สาขาวิศวกรรมคอมพิวเตอร์" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&family=Sarabun:wght@300;400;600;700&display=swap"
+    rel="stylesheet">
+  <!-- Splide.js (Carousel) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide/dist/css/splide.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide/dist/js/splide.min.js"></script>
+
+  <style>
+    :root {
+      --brand: #a63d35;
+      /* terracotta */
+      --brand-2: #e7c7bf;
+      /* pale */
+      --ink: #111827;
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      font-family: 'Sarabun', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans Thai', sans-serif;
+    }
+
+    .brand {
+      color: var(--brand)
+    }
+
+    .bg-brand {
+      background: var(--brand)
+    }
+
+    .bg-brand-2 {
+      background: var(--brand-2)
+    }
+
+    .shadow-soft {
+      box-shadow: 0 10px 25px rgba(17, 24, 39, .08)
+    }
+
+    .glass {
+      backdrop-filter: saturate(160%) blur(8px);
+      background: rgba(255, 255, 255, .65)
+    }
+
+    /* Page background mesh gradient */
+    .page-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(600px 600px at 8% 10%, rgba(166, 61, 53, .10), transparent 60%),
+        radial-gradient(700px 700px at 92% 30%, rgba(231, 199, 191, .35), transparent 60%),
+        radial-gradient(800px 800px at 50% 100%, rgba(255, 244, 214, .35), transparent 60%),
+        #faf7f5;
+    }
+
+    @media print {
+
+      nav,
+      .no-print,
+      #backToTop {
+        display: none !important
+      }
+
+      section {
+        break-inside: avoid
+      }
+
+      body {
+        background: #fff
+      }
+    }
+  </style>
+</head>
+
+<body class="text-slate-800">
+  <!-- soft background -->
+  <div class="page-bg"></div>
+
+  <!-- ====== NAVBAR ====== -->
+  <nav class="sticky top-0 z-50 glass border-b border-white/40">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-center justify-between h-14">
+        <a href="#home" class="flex items-center gap-2 font-semibold tracking-wide brand">
+          <!-- โลโก้ KMUTMB -->
+          <img src="assets/images/Logo/KMUTMB.png" alt="KMUTNB" class="h-6 w-auto rounded-sm" />
+          <span
+            class="transition-all no-print inline-flex items-center gap-2 bg-brand text-white px-2 py-1 text-sm rounded-xl shadow-soft hover:scale-105 hover:opacity-90">PORTFOLIO</span>
+          <span class="text-slate-700"> Jirayu</span>
+        </a>
+
+        <!-- ปุ่ม CONTACT -->
+        <a href="#contact"
+          class="transition-all no-print inline-flex items-center gap-2 bg-brand text-white px-3 py-2 text-sm rounded-xl shadow-soft hover:scale-105 hover:opacity-90">
+          <i class="ri-contacts-book-2-line text-base"></i> CONTACT
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ====== HERO ====== -->
+  <section id="home" class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-rose-50/70 via-white to-amber-50/70"></div>
+    <div class="relative max-w-6xl mx-auto px-4 py-16 md:py-24 grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <h1 class="text-4xl md:text-5xl font-bold leading-tight text-slate-900">
+          Jirayu Chiyanuwat <span class="block text-2xl md:text-3xl mt-3 brand">Portfolio for University</span>
+        </h1>
+        <p class="mt-6 text-lg text-slate-600 max-w-xl">
+          นักเรียนโรงเรียนสารสิทธิ์พิทยาลัย จังหวัดราชบุรี มุ่งเข้าสู่ <b>คณะวิศวกรรมศาสตร์</b>
+          สาขา <b>วิศวกรรมคอมพิวเตอร์</b> มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ
+        </p>
+        <div class="mt-8 flex items-center gap-3 text-sm">
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand/10 text-brand"><span
+              class="h-2 w-2 rounded-full bg-brand"></span> Computer Engineering</span>
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-700">GPA (GPAX)
+            3.00</span>
+        </div>
+      </div>
+      <div class="order-first md:order-none">
+        <div class="relative aspect-[4/3] rounded-3xl bg-white/70 p-3 shadow-soft border border-white overflow-hidden">
+          <div
+            class="h-full w-full rounded-2xl bg-gradient-to-br from-brand-2 to-white grid place-items-center text-center relative">
+            <!-- วอเตอร์มาร์กโลโก้ KMUTNB -->
+            <img src="assets/images/Logo/KMUTMB.png" alt="KMUTNB"
+              class="absolute -right-2 -bottom-2 w-20 opacity-30 pointer-events-none select-none" />
+            <img src="assets/images/picture/Profile.png" alt="Profile" class="cursor-pointer"
+              onclick="openLightbox('assets/images/picture/Profile.png')" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== ABOUT ====== -->
+  <section id="about" class="py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold text-slate-900">ประวัติส่วนตัว</h2>
+      <div class="mt-2 h-1 w-14 rounded bg-[var(--brand)]/30"></div>
+
+      <p class="mt-4 text-slate-600 leading-relaxed">
+        ผมชื่อ <b>นายจิรายุ ชิยานุวัฒน์</b> (ไอซ์) สนใจเทคโนโลยีและการพัฒนาซอฟต์แวร์ชอบเรียนรู้สิ่งใหม่ ลงมือทำจริง
+        ทั้งงานเว็บไซต์ งานเขียนโปรแกรม และการทำงานเป็นทีม <br>ผ่านกิจกรรมและการแข่งขันต่าง ๆ
+        ที่ช่วยฝึกความคิดเชิงวิเคราะห์และการสื่อสาร
+      </p>
+
+      <div class="mt-6 grid md:grid-cols-3 gap-6">
+        <!-- การ์ด: ข้อมูลสั้น ๆ -->
+        <div
+          class="group rounded-2xl bg-white p-5 shadow-soft border border-slate-100 hover:-translate-y-1 hover:shadow-lg hover:border-[var(--brand)]/40 transition-all duration-300">
+          <div class="flex items-center gap-2">
+            <i class="ri-id-card-line text-[var(--brand)] text-xl"></i>
+            <h3 class="font-semibold text-slate-900">ข้อมูลสั้น ๆ</h3>
+          </div>
+
+          <ul class="mt-3 space-y-2 text-sm">
+            <li class="flex items-center gap-2">
+              <i class="ri-calendar-line text-[var(--brand)]"></i>
+              <span><b>วันเกิด:</b> 11 มิ.ย. 2550 (อายุ 18 ปี)</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <i class="ri-school-line text-[var(--brand)]"></i>
+              <span><b>โรงเรียน:</b> โรงเรียนสารสิทธิ์พิทยาลัย</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <i class="ri-flask-line text-[var(--brand)]"></i>
+              <span><b>แผนการเรียน:</b> วิทย์–คณิต</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <i class="ri-bar-chart-2-line text-[var(--brand)]"></i>
+              <span><b>GPAX (คาดการณ์):</b> ประมาณ 3.00</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <i class="ri-map-pin-2-line text-[var(--brand)]"></i>
+              <span><b>ที่อยู่:</b> อ.ท่ายาง จ.เพชรบุรี</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- การ์ด: ความสนใจ -->
+        <div
+          class="group rounded-2xl bg-white p-5 shadow-soft border border-slate-100 hover:-translate-y-1 hover:shadow-lg hover:border-[var(--brand)]/40 transition-all duration-300">
+          <div class="flex items-center gap-2">
+            <i class="ri-lightbulb-flash-line text-[var(--brand)] text-xl"></i>
+            <h3 class="font-semibold text-slate-900">ความสนใจ</h3>
+          </div>
+
+          <ul class="mt-3 grid grid-cols-2 gap-2 text-sm">
+            <li class="px-3 py-1 rounded-lg bg-brand/10 text-brand inline-flex items-center gap-2">
+              <i class="ri-code-line"></i> Web Dev
+            </li>
+            <li class="px-3 py-1 rounded-lg bg-brand/10 text-brand inline-flex items-center gap-2">
+              <i class="ri-cpu-line"></i> Programming
+            </li>
+            <li class="px-3 py-1 rounded-lg bg-brand/10 text-brand inline-flex items-center gap-2">
+              <i class="ri-layout-2-line"></i> UI/UX
+            </li>
+            <li class="px-3 py-1 rounded-lg bg-brand/10 text-brand inline-flex items-center gap-2">
+              <i class="ri-team-line"></i> Community
+            </li>
+          </ul>
+        </div>
+
+        <!-- การ์ด: ทักษะหลัก -->
+        <div
+          class="group rounded-2xl bg-white p-5 shadow-soft border border-slate-100 hover:-translate-y-1 hover:shadow-lg hover:border-[var(--brand)]/40 transition-all duration-300">
+          <div class="flex items-center gap-2">
+            <i class="ri-tools-line text-[var(--brand)] text-xl"></i>
+            <h3 class="font-semibold text-slate-900">ทักษะหลัก</h3>
+          </div>
+
+          <ul class="mt-3 space-y-2 text-sm">
+            <li class="flex items-center gap-2">
+              <i class="ri-html5-line text-[var(--brand)]"></i>
+              <span>HTML • CSS • Tailwind</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <i class="ri-javascript-line text-[var(--brand)]"></i>
+              <span>JavaScript / TypeScript (พื้นฐาน)</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <i class="ri-brush-line text-[var(--brand)]"></i>
+              <span>Canva / PowerPoint</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <i class="ri-group-line text-[var(--brand)]"></i>
+              <span>สื่อสารและทำงานเป็นทีม</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <i class="ri-lightbulb-line text-[var(--brand)]"></i>
+              <span>คิดเชิงวิเคราะห์ แก้ปัญหา</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ====== EDUCATION ====== -->
+  <section id="education" class="py-14 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-baseline justify-between">
+        <h2 class="text-2xl md:text-3xl font-bold text-slate-900">ประวัติการศึกษา</h2>
+      </div>
+      <div class="mt-2 h-1 w-14 rounded bg-[var(--brand)]/30"></div>
+
+      <div class="mt-6 grid md:grid-cols-3 gap-5">
+        <div
+          class="rounded-2xl bg-white p-5 shadow-soft border border-slate-100 hover:scale-105 hover:border-brand/30 transition-all duration-300">
+          <div class="text-xs uppercase tracking-widest text-slate-500">ประถมศึกษา 2557–2562</div>
+          <div class="mt-2 font-semibold">โรงเรียนสารสิทธิ์พิทยาลัย</div>
+          <div class="mt-3 flex justify-center">
+            <img src="assets/images/Logo/SJLG.png" alt="School Logo" class="w-[120px] h-[120px] object-contain" />
+          </div>
+        </div>
+        <div
+          class="rounded-2xl bg-white p-5 shadow-soft border border-slate-100 hover:scale-105 hover:border-brand/30 transition-all duration-300">
+          <div class="text-xs uppercase tracking-widest text-slate-500">มัธยมศึกษาตอนต้น 2563–2565</div>
+          <div class="mt-2 font-semibold">โรงเรียนราชราษฎร์บำรุง</div>
+          <div class="mt-3 flex justify-center">
+            <img src="assets/images/Logo/RR.png" alt="School Logo" class="w-[120px] h-[120px] object-contain" />
+          </div>
+        </div>
+        <div
+          class="rounded-2xl bg-white p-5 shadow-soft border border-slate-100 hover:scale-105 hover:border-brand/30 transition-all duration-300">
+          <div class="text-xs uppercase tracking-widest text-slate-500">มัธยมศึกษาตอนปลาย 2566–2568</div>
+          <div class="mt-2 font-semibold">โรงเรียนสารสิทธิ์พิทยาลัย – GPAX 3.00</div>
+          <div class="mt-3 flex justify-center">
+            <img src="assets/images/Logo/SJLG.png" alt="School Logo" class="w-[120px] h-[120px] object-contain" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== SKILLS ====== -->
+  <section id="skills" class="py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold text-slate-900">ทักษะ & ความสามารถ</h2>
+      <div class="mt-2 h-1 w-14 rounded bg-[var(--brand)]/30"></div>
+      <p class="mt-3 text-slate-600">สรุปทักษะที่เกี่ยวข้องกับสาขาที่สมัคร</p>
+
+      <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Front-end Basics -->
+        <div
+          class="group rounded-2xl bg-white p-5 shadow-soft border border-slate-100 hover:-translate-y-1 hover:shadow-xl hover:border-[var(--brand)]/50 transition duration-300">
+          <div class="h-1 w-full bg-gradient-to-r from-[var(--brand)]/70 to-amber-400/60 rounded mb-3"></div>
+          <div class="flex items-center gap-3 mb-2">
+            <div
+              class="w-10 h-10 flex items-center justify-center rounded-full bg-[var(--brand)]/10 text-[var(--brand)]">
+              <i class="ri-html5-line text-xl"></i>
+            </div>
+            <h3 class="font-semibold text-slate-900">Front-end Basics</h3>
+          </div>
+          <p class="text-sm text-slate-600">HTML, CSS, Tailwind, Responsive</p>
+        </div>
+
+        <!-- Programming -->
+        <div
+          class="group rounded-2xl bg-white p-5 shadow-soft border border-slate-100 hover:-translate-y-1 hover:shadow-xl hover:border-[var(--brand)]/50 transition duration-300">
+          <div class="h-1 w-full bg-gradient-to-r from-[var(--brand)]/70 to-blue-400/60 rounded mb-3"></div>
+          <div class="flex items-center gap-3 mb-2">
+            <div
+              class="w-10 h-10 flex items-center justify-center rounded-full bg-[var(--brand)]/10 text-[var(--brand)]">
+              <i class="ri-code-s-slash-line text-xl"></i>
+            </div>
+            <h3 class="font-semibold text-slate-900">Programming</h3>
+          </div>
+          <p class="text-sm text-slate-600">JavaScript/TypeScript (พื้นฐาน), การคิดเป็นขั้นตอน</p>
+        </div>
+
+        <!-- Design Tools -->
+        <div
+          class="group rounded-2xl bg-white p-5 shadow-soft border border-slate-100 hover:-translate-y-1 hover:shadow-xl hover:border-[var(--brand)]/50 transition duration-300">
+          <div class="h-1 w-full bg-gradient-to-r from-[var(--brand)]/70 to-pink-400/60 rounded mb-3"></div>
+          <div class="flex items-center gap-3 mb-2">
+            <div
+              class="w-10 h-10 flex items-center justify-center rounded-full bg-[var(--brand)]/10 text-[var(--brand)]">
+              <i class="ri-brush-line text-xl"></i>
+            </div>
+            <h3 class="font-semibold text-slate-900">Design Tools</h3>
+          </div>
+          <p class="text-sm text-slate-600">Canva, PowerPoint, Photoshop (พื้นฐาน)</p>
+        </div>
+
+        <!-- Soft Skills -->
+        <div
+          class="group rounded-2xl bg-white p-5 shadow-soft border border-slate-100 hover:-translate-y-1 hover:shadow-xl hover:border-[var(--brand)]/50 transition duration-300">
+          <div class="h-1 w-full bg-gradient-to-r from-[var(--brand)]/70 to-emerald-400/60 rounded mb-3"></div>
+          <div class="flex items-center gap-3 mb-2">
+            <div
+              class="w-10 h-10 flex items-center justify-center rounded-full bg-[var(--brand)]/10 text-[var(--brand)]">
+              <i class="ri-team-line text-xl"></i>
+            </div>
+            <h3 class="font-semibold text-slate-900">Soft Skills</h3>
+          </div>
+          <p class="text-sm text-slate-600">ทำงานเป็นทีม, สื่อสาร, แก้ปัญหา, วินัย</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ====== ACTIVITIES ====== -->
+  <section id="activities" class="py-14 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-baseline justify-between">
+        <h2 class="text-2xl md:text-3xl font-bold text-slate-900">กิจกรรม</h2>
+        <span class="text-sm text-slate-500">คลิกการ์ดเพื่ออ่านรายละเอียด</span>
+      </div>
+      <div id="activitiesGrid" class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+  </section>
+
+  <!-- ====== CERTIFICATES ====== -->
+  <section id="certificates" class="py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-baseline justify-between">
+        <h2 class="text-2xl md:text-3xl font-bold text-slate-900">ผลงาน / เกียรติบัตร</h2>
+        <span class="text-sm text-slate-500">คลิกการ์ดเพื่อดูรูป</span>
+      </div>
+      <div class="mt-2 h-1 w-14 rounded bg-[var(--brand)]/30"></div>
+
+      <div id="certGrid" class="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+    </div>
+  </section>
+
+  <!-- Lightbox Dialog -->
+  <dialog id="lightbox" class="backdrop:bg-black/60 p-0 rounded-xl w-[90vw] md:w-[70vw]">
+    <img id="lightboxImg" alt="preview" class="w-full h-auto rounded-xl" />
+  </dialog>
+
+  <!-- ====== SOP ====== -->
+  <section id="sop" class="py-14 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold text-slate-900">Statement of Purpose (SOP)</h2>
+      <div class="mt-2 h-1 w-14 rounded bg-[var(--brand)]/30"></div>
+      <div class="mt-6 rounded-2xl bg-white p-6 border border-slate-200 shadow-soft leading-8 text-slate-700">
+        <p> สวัสดีครับ<br>
+          ผมชื่อ นายจิรายุ ชิยานุวัฒน์ กำลังศึกษาชั้น ม.6 ที่โรงเรียนสารสิทธิ์พิทยาลัย จังหวัดราชบุรี
+          มีความสนใจด้านคอมพิวเตอร์มาตั้งแต่เด็ก โดยเฉพาะช่วงโควิด-19 ที่ได้ใช้คอมพิวเตอร์เครื่องแรก
+          ทำให้เริ่มเรียนรู้การตั้งค่าระบบ การพูดคุยกับ Developer ของเกมเซิร์ฟเวอร์ รวมถึงการเขียนเว็บและทำกราฟิก
+
+          นอกจากด้านเทคโนโลยี ผมยังเข้าร่วมกิจกรรมต่าง ๆ เช่น เชียร์หลีดเดอร์ สตาฟฟ์ จิตอาสา และการเป็นผู้นำ
+          ซึ่งช่วยพัฒนาทักษะการทำงานเป็นทีมและการแก้ปัญหาเฉพาะหน้า
+
+          ผมตั้งใจศึกษาต่อที่ คณะวิศวกรรมศาสตร์ สาขาวิศวกรรมคอมพิวเตอร์ มจพ.
+          เพราะเชื่อว่าจะช่วยพัฒนาศักยภาพให้พร้อมสู่การทำงานในอนาคต โดยมุ่งสู่การเป็นวิศวกรคอมพิวเตอร์หรือโปรแกรมเมอร์
+          และพร้อมเผชิญทุกความท้าทายเพื่อพัฒนาตนเองอย่างเต็มที่
+
+        </p>
+        <p class="mt-4">ขอบคุณครับ <br>
+          นายจิรายุ ชิยานุวัฒน์</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== CONTACT ====== -->
+  <section id="contact" class="py-14 scroll-mt-20">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold text-slate-900">ติดต่อ</h2>
+      <div class="mt-2 h-1 w-14 rounded bg-[var(--brand)]/30"></div>
+      <p class="mt-3 text-slate-600">กด “คัดลอก” เพื่อคัดลอกข้อมูลติดต่อ</p>
+
+      <div class="mt-6">
+        <div class="rounded-2xl bg-white p-6 border border-slate-200 shadow-soft">
+          <ul class="space-y-4 text-slate-700">
+            <li class="flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3">
+                <i class="ri-phone-fill w-8 h-8 rounded-lg bg-brand/10 text-brand grid place-items-center"></i>
+                <span>062-104-1275</span>
+              </div>
+              <button class="text-xs px-2 py-1 rounded bg-slate-100 hover:bg-slate-200"
+                data-copy="0621041275">คัดลอก</button>
+            </li>
+
+            <li class="flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3">
+                <i class="ri-mail-fill w-8 h-8 rounded-lg bg-brand/10 text-brand grid place-items-center"></i>
+                <span>jirayu.chiyanuwat01@gmail.com</span>
+              </div>
+              <button class="text-xs px-2 py-1 rounded bg-slate-100 hover:bg-slate-200"
+                data-copy="jirayu.chiyanuwat01@gmail.com">คัดลอก</button>
+            </li>
+
+            <li class="flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3">
+                <i class="ri-facebook-fill w-8 h-8 rounded-lg bg-brand/10 text-brand grid place-items-center"></i>
+                <span>Jirayu Chiyanuwat</span>
+              </div>
+              <button class="text-xs px-2 py-1 rounded bg-slate-100 hover:bg-slate-200"
+                data-copy="Jirayu Chiyanuwat">คัดลอก</button>
+            </li>
+
+            <li class="flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3">
+                <i class="ri-instagram-line w-8 h-8 rounded-lg bg-brand/10 text-brand grid place-items-center"></i>
+                <span>icejry_</span>
+              </div>
+              <button class="text-xs px-2 py-1 rounded bg-slate-100 hover:bg-slate-200"
+                data-copy="icejry_">คัดลอก</button>
+            </li>
+
+            <li class="flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3">
+                <i class="ri-line-line w-8 h-8 rounded-lg bg-brand/10 text-brand grid place-items-center"></i>
+                <span>ice27369</span>
+              </div>
+              <button class="text-xs px-2 py-1 rounded bg-slate-100 hover:bg-slate-200"
+                data-copy="ice27369">คัดลอก</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="py-10 border-t border-slate-200 bg-white">
+    <div class="max-w-6xl mx-auto px-4 text-sm text-slate-500 flex flex-col items-center gap-4 text-center">
+      <p>© <span id="year"></span> Jirayu Chiyanuwat • Portfolio</p>
+      <div class="flex gap-4">
+        <a href="tel:0621041275" aria-label="โทรศัพท์"
+          class="w-10 h-10 flex items-center justify-center rounded-full bg-emerald-500 text-white hover:bg-emerald-600 hover:scale-110 transition"><i
+            class="ri-phone-fill text-xl leading-none"></i></a>
+        <a href="mailto:jirayu.chiyanuwat01@gmail.com" aria-label="อีเมล"
+          class="w-10 h-10 flex items-center justify-center rounded-full bg-indigo-500 text-white hover:bg-indigo-600 hover:scale-110 transition"><i
+            class="ri-mail-fill text-xl leading-none"></i></a>
+        <a href="https://www.facebook.com/jirayu.chyanuwat" target="_blank" rel="noopener" aria-label="Facebook"
+          class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600 text-white hover:bg-blue-700 hover:scale-110 transition"><i
+            class="ri-facebook-fill text-xl leading-none"></i></a>
+        <a href="https://www.instagram.com/icejry_" target="_blank" rel="noopener" aria-label="Instagram"
+          class="w-10 h-10 flex items-center justify-center rounded-full bg-pink-500 text-white hover:bg-pink-600 hover:scale-110 transition"><i
+            class="ri-instagram-line text-xl leading-none"></i></a>
+        <a href="https://line.me/ti/p/lg5dPa6zS4" target="_blank" rel="noopener" aria-label="Line"
+          class="w-10 h-10 flex items-center justify-center rounded-full bg-green-500 text-white hover:bg-green-600 hover:scale-110 transition"><i
+            class="ri-line-line text-xl leading-none"></i></a>
+      </div>
+      <p class="text-xs text-slate-400">Made with ❤️ by Namkheang</p>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button id="backToTop"
+    class="fixed bottom-5 right-5 hidden rounded-full bg-slate-900 text-white h-11 w-11 shadow-soft hover:bg-slate-800">↑</button>
+
+  <script>
+    // ======== DATA ========
+    const activities = [
+      { title: 'การสร้างนวัตกรรมอัจฉริยะและสมองกลฝังตัว', desc: 'เข้าร่วมอบรมเชิงปฏิบัติการ “การสร้างนวัตกรรมอัจฉริยะและสมองกลฝังตัว” เพื่อพัฒนาทักษะด้านเทคโนโลยีและวิทยาการคอมพิวเตอร์ โดยได้ฝึกปฏิบัติจริงในห้องทดลองวิศวกรรมไฟฟ้า คณะวิศวกรรมศาสตร์ มศว องครักษ์', img: 'assets/images/picture/image.png' },
+      { title: 'เพิ่มทักษะเทคโนโลยีสมัยใหม่ที่จำเป็นสำหรับชีวิตในโลกยุคดิจิทัล', desc: 'เข้าร่วมอบรมเชิงปฎิบัติการในโครงการ "เพิ่มทักษะเทคโนโลยีสมัยใหม่ที่จำเป็นสำหรับชีวิตในโลกยุคดิจิทัล" ณ ห้องประชุม 114 คณะวิศวกรรมศาสตร์ มหาวิทยาลัยมหิดล', img: 'assets/images/picture/image.png' },
+      { title: 'เข้าศึกษาแหล่งเรียนรู้ด้านวิศวกรรมศาสตร์', desc: 'ศึกษาดูงานและเรียนรู้เทคโนโลยีด้านวิศวกรรม ณ ม.เทคโนโลยีพระจอมเกล้าพระนครเหนือ เพื่อเปิดโลกทัศน์และเสริมความรู้ทางวิทยาศาสตร์และเทคโนโลยี', img: 'assets/images/picture/image.png' },
+      { title: 'การเป็นเชียร์ลีดเดอร์ในงานกีฬาสีของโรงเรียน', desc: 'เข้าร่วมเป็นเชียร์ลีดเดอร์ในงานกีฬาสี ปีการศึกษา 2566 เสริมสร้างทักษะการทำงานเป็นทีม ความคิดสร้างสรรค์ และความสามัคคีในหมู่เพื่อนนักเรียน', img: 'assets/images/picture/image.png' },
+      { title: 'กิจกรรมชุมนุม อาชีพจากภูมิปัญญาท้องถิ่น <br> บูรณาการปรัชญาของเศรษฐกิจพอเพียง', desc: 'ข้าพเจ้าเข้าร่วมโครงงาน “จักสานผักตบชวา” เพื่อนำวัชพืชท้องถิ่นมาแปรรูปเป็นผลิตภัณฑ์ เช่น กระเป๋าและตะกร้า โดยบูรณาการภูมิปัญญาท้องถิ่นกับแนวคิดเศรษฐกิจพอเพียง ช่วยลดปัญหาสิ่งแวดล้อม สร้างรายได้ และใช้ทรัพยากรอย่างคุ้มค่า พร้อมทั้งได้เรียนรู้การทำงานเป็นทีม ความคิดสร้างสรรค์ และการอนุรักษ์วัฒนธรรมท้องถิ่น', img: 'assets/images/picture/image.png' },
+      { title: 'การอบรมโครงการขับเคลื่อนการดำเนินงานป้องกันและแก้ไขปัญหายาเสพติด', desc: 'เข้าร่วมกิจกรรมอบรมโครงการขับเคลื่อนการดำเนินงานป้องกันและแก้ไขปัญหายาเสพติดร่วมกับสำนักงานศึกษาธิการจังหวัดบุรีรัมย์ โดยมีการให้ความรู้และแนวทางการแก้ไขปัญหาอย่างยั่งยืนสำหรับนักเรียนระดับชั้นมัธยมศึกษา', img: 'assets/images/picture/image.png' },
+      { title: 'รวมพลังสร้างสัปปายะสู่วัดด้วยวิถี 5ส. (Bing Cleaning Day)', desc: 'เข้าร่วมกิจกรรม “รวมพลังสร้างสัปปายะสู่ศาสนสถานด้วยวิถี 5ส.” โดยมีวัตถุประสงค์เพื่อปลูกฝังจิตสาธารณะ พัฒนาสภาพแวดล้อมวัดให้สะอาดและเป็นระเบียบ เกิดความภาคภูมิใจในการมีส่วนร่วมดูแลศาสนสถาน', img: 'assets/images/picture/image.png' },
+      { title: 'กิจกรรมชุมนุม “อาชีพอิสระ”', desc: 'ร่วมกิจกรรมชุมนุม “อาชีพอิสระ” โดยนักเรียนร่วมคิดเมนูอาหาร คำนวณต้นทุน–กำไร จัดซื้อวัตถุดิบ และทดลองจำหน่ายสินค้าจริงภายในโรงเรียน เรียนรู้กระบวนการวางแผน บริหารจัดการ และทำงานเป็นทีม', img: 'assets/images/picture/image.png' },
+      { title: '7th SJ Film Festival 2024', desc: 'เข้าร่วมผลิตภาพยนตร์สั้นในงาน 7th SJ Film Festival 2024 โดยรับผิดชอบในกระบวนการคิดบท กำกับ ถ่ายทำ และตัดต่อวิดีโอ เรียนรู้การทำงานร่วมกันเป็นทีม รวมถึงพัฒนาทักษะด้านเทคโนโลยีดิจิทัลและการสื่อสารสร้างสรรค์', img: 'assets/images/picture/image.png' },
+    ];
+
+    const certificates = [
+      { img: 'assets/images/certificate/Buddha.png', caption: 'ค่ายพุทธบุตร' },
+      { img: 'assets/images/certificate/SJ.png', caption: 'กิจกรรมเด่น' },
+      { img: 'assets/images/certificate/Summer.png', caption: 'เกียรติบัตรกิจกรรมวิชาการ' },
+      { img: 'assets/images/certificate/SWU.png', caption: 'เกียรติบัตรเข้าร่วมโครงการพัฒนาทักษะ' },
+      { img: 'assets/images/certificate/MU.png', caption: 'เพิ่มทักษะเทคโนโลยีสมัยใหม่' },
+      { img: 'assets/images/certificate/Sumsung.png', caption: 'Solve for Tomorrow' },
+      { img: 'assets/images/certificate/borntodev.png', caption: 'Fundamental Web Dev' },
+      { img: 'assets/images/certificate/AI.png', caption: 'AI' },
+      { img: 'assets/images/certificate/BOTNOI.png', caption: 'BOTNOI' },
+      { img: 'assets/images/certificate/CiRA.png', caption: 'CiRA' },
+      { img: 'assets/images/certificate/TYPOON.png', caption: 'TYPOON' },
+      { img: 'assets/images/certificate/JK.png', caption: 'JK' },
+    ];
+
+    // ======== RENDER ========
+    const actWrap = document.getElementById('activitiesGrid');
+    const certWrap = document.getElementById('certGrid');
+
+    // Activities with Carousel (supports img or imgs)
+    activities.forEach((a, idx) => {
+      const imgs = Array.isArray(a.imgs) && a.imgs.length ? a.imgs : [a.img];
+      const splideId = `splide-activity-${idx}`;
+
+      const slides = imgs.map(src => `
+        <li class="splide__slide">
+          <img src="${src}" alt="${a.title}" class="w-full h-full object-cover rounded-lg" onclick="openLightbox('${src}')"/>
+        </li>
+      `).join('');
+
+      const el = document.createElement('article');
+      el.className = 'group rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-soft';
+      el.innerHTML = `
+        <div class="splide aspect-[4/3]" id="${splideId}">
+          <div class="splide__track">
+            <ul class="splide__list">${slides}</ul>
+          </div>
+        </div>
+        <div class="p-5">
+          <h3 class="font-semibold">${a.title}</h3>
+          <p class="mt-2 text-sm text-slate-600">${a.desc}</p>
+        </div>`;
+      actWrap.appendChild(el);
+
+      new Splide(`#${splideId}`, {
+        type: 'loop',
+        autoplay: true,
+        interval: 3200,
+        arrows: true,
+        pagination: true,
+      }).mount();
+    });
+
+    // Certificates (คงเดิม)
+    certificates.forEach(c => {
+      const el = document.createElement('button');
+      el.className = 'group rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-soft text-left hover:border-brand/30 transition';
+      el.innerHTML = `
+        <div class="aspect-[4/3] overflow-hidden">
+          <img src="${c.img}" alt="${c.caption}" class="h-full w-full object-cover group-hover:scale-105 transition"/>
+        </div>
+        <div class="p-3">
+          <div class="text-sm text-center font-medium text-slate-700 group-hover:text-[var(--brand)]">${c.caption}</div>
+        </div>`;
+      el.addEventListener('click', () => openLightbox(c.img));
+      certWrap.appendChild(el);
+    });
+
+    // ======== Lightbox ========
+    const dlg = document.getElementById('lightbox');
+    const img = document.getElementById('lightboxImg');
+    function openLightbox(src) { img.src = src; dlg.showModal(); }
+    dlg?.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+
+    // ======== Copy buttons ========
+    document.querySelectorAll('[data-copy]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const text = btn.getAttribute('data-copy');
+        try {
+          await navigator.clipboard.writeText(text);
+          const old = btn.textContent;
+          btn.textContent = 'คัดลอกแล้ว';
+          setTimeout(() => btn.textContent = old, 1200);
+        } catch (e) { console.warn(e); }
+      });
+    });
+
+    // ======== Back to top ========
+    const topBtn = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 480) topBtn.classList.remove('hidden');
+      else topBtn.classList.add('hidden');
+    });
+    topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+  </script>
+</body>
+
+</html>
