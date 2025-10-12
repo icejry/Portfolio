@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jirayu – Portfolio for University</title>
+  <meta name="description"
+    content="Portfolio เว็บไซต์สำหรับยื่นเข้ามหาวิทยาลัย – คณะวิศวกรรมศาสตร์ สาขาวิศวกรรมคอมพิวเตอร์" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <!-- Splide.js (Carousel) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide/dist/css/splide.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide/dist/js/splide.min.js" defer></script>
+
+  <style>
+    :root {
+      --brand: #a63d35;
+      --brand-2: #e7c7bf;
+      --ink: #111827
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      font-family: 'Sarabun', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans Thai', sans-serif
+    }
+
+    .brand {
+      color: var(--brand)
+    }
+
+    .bg-brand {
+      background: var(--brand)
+    }
+
+    .bg-brand-2 {
+      background: var(--brand-2)
+    }
+
+    .shadow-soft {
+      box-shadow: 0 10px 25px rgba(17, 24, 39, .08)
+    }
+
+    .glass {
+      backdrop-filter: saturate(160%) blur(8px);
+      background: rgba(255, 255, 255, .65)
+    }
+
+    .page-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(600px 600px at 8% 10%, rgba(166, 61, 53, .10), transparent 60%),
+        radial-gradient(700px 700px at 92% 30%, rgba(231, 199, 191, .35), transparent 60%),
+        radial-gradient(800px 800px at 50% 100%, rgba(255, 244, 214, .35), transparent 60%), #faf7f5
+    }
+
+    /* Watermark (คงที่ทุกแพลตฟอร์ม) */
+    .has-watermark {
+      position: relative;
+      isolation: isolate
+    }
+
+    .has-watermark::after {
+      content: "";
+      position: absolute;
+      right: .5rem;
+      bottom: .5rem;
+      width: clamp(56px, 10vw, 88px);
+      aspect-ratio: 1/1;
+      background: url("assets/images/Logo/KMUTMB.png") center/contain no-repeat;
+      opacity: .35;
+      pointer-events: none;
+      -webkit-user-select: none;
+      user-select: none;
+      filter: contrast(1.05) saturate(.9)
+    }
+
+    @media print {
+      .has-watermark::after {
+        opacity: .18
+      }
+    }
+
+    /* Splide: arrows/dots นุ่มตา */
+    .splide {
+      position: relative
+    }
+
+    .splide__arrows {
+      pointer-events: none
+    }
+
+    .splide__arrow {
+      pointer-events: auto;
+      width: 36px;
+      height: 36px;
+      border-radius: 9999px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, .78);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(148, 163, 184, .25);
+      color: var(--brand);
+      box-shadow: 0 6px 18px rgba(17, 24, 39, .08);
+      opacity: 0;
+      transition: opacity .25s ease, transform .25s ease, background .2s
+    }
+
+    .splide:hover .splide__arrow {
+      opacity: 1
+    }
+
+    .splide__arrow--prev {
+      left: 10px
+    }
+
+    .splide__arrow--next {
+      right: 10px
+    }
+
+    .splide__arrow:disabled {
+      opacity: .25
+    }
+
+    .splide__arrow svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor !important
+    }
+
+    .splide__pagination {
+      bottom: .5rem
+    }
+
+    .splide__pagination__page {
+      width: 6px;
+      height: 6px;
+      margin: 3px;
+      border: 0;
+      background: rgba(2, 6, 23, .16)
+    }
+
+    .splide__pagination__page.is-active {
+      background: var(--brand);
+      box-shadow: 0 0 0 4px rgba(166, 61, 53, .10)
+    }
+
+    /* เงาไล่สี + ป้ายใบ้ “ปัดเพื่อดูรูป” บนมือถือ */
+    @media (hover:none) and (pointer:coarse) {
+
+      .splide.touch-hint::before,
+      .splide.touch-hint::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 44px;
+        pointer-events: none;
+        z-index: 10
+      }
+
+      .splide.touch-hint::before {
+        left: 0;
+        background: linear-gradient(to right, rgba(255, 255, 255, .85), transparent)
+      }
+
+      .splide.touch-hint::after {
+        right: 0;
+        background: linear-gradient(to left, rgba(255, 255, 255, .85), transparent)
+      }
+
+      .swipe-hint {
+        position: absolute;
+        right: .5rem;
+        bottom: .5rem;
+        display: flex;
+        align-items: center;
+        gap: .25rem;
+        font-size: .75rem;
+        line-height: 1;
+        color: #fff;
+        background: rgba(17, 24, 39, .55);
+        padding: .4rem .6rem;
+        border-radius: 9999px;
+        z-index: 20;
+        backdrop-filter: blur(4px)
+      }
+    }
+
+    .swipe-chev {
+      display: inline-block;
+      opacity: .7;
+      animation: swipeX 1.4s infinite ease-in-out
+    }
+
+    .swipe-chev:nth-child(1) {
+      animation-delay: 0s
+    }
+
+    .swipe-chev:nth-child(2) {
+      animation-delay: .15s
+    }
+
+    @keyframes swipeX {
+      0% {
+        transform: translateX(0);
+        opacity: .45
+      }
+
+      50% {
+        transform: translateX(-6px);
+        opacity: 1
+      }
+
+      100% {
+        transform: translateX(0);
+        opacity: .45
+      }
+    }
+
+    .swipe-hint.hide {
+      display: none !important
+    }
+
+    @media(max-width:640px) {
+      .splide__arrow {
+        display: none !important
+      }
+    }
+
+    @media print {
+
+      nav,
+      .no-print,
+      #backToTop {
+        display: none !important
+      }
+
+      section {
+        break-inside: avoid
+      }
+
+      body {
+        background: #fff
+      }
+    }
+  </style>
+</head>
+
+<body class="text-slate-800">
+  <div class="page-bg"></div>
+
+  <!-- NAVBAR -->
+  <nav class="sticky top-0 z-50 glass border-b border-white/40">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-center justify-between h-14">
+        <a href="#home" class="flex items-center gap-2 font-semibold tracking-wide brand">
+          <img src="assets/images/Logo/KMUTMB.png" alt="KMUTNB" class="h-6 w-auto rounded-sm" loading="lazy" />
+          <span
+            class="transition-all no-print inline-flex items-center gap-2 bg-brand text-white px-3 py-2 text-sm rounded-xl shadow-soft hover:scale-105 hover:opacity-90">PORTFOLIO</span>
+          <span class="text-slate-700"> Jirayu</span>
+        </a>
+        <!-- ปุ่ม PDF (ปุ่มเดียว) -->
+        <button type="button" aria-label="Portfolio PDF" onclick="openPdfPreview()"
+          class="transition-all no-print inline-flex items-center gap-2 bg-brand text-white px-3 py-2 text-sm rounded-xl shadow-soft hover:scale-105 hover:opacity-90">
+          <i class="ri-file-pdf-line text-xl leading-none"></i> PDF
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="home" class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-rose-50/70 via-white to-amber-50/70"></div>
+    <div class="relative max-w-6xl mx-auto px-4 py-16 md:py-24 grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <h1 class="text-4xl md:text-5xl font-bold leading-tight text-slate-900">
+          Jirayu Chiyanuwat <span class="block text-2xl md:text-3xl mt-3 brand">Portfolio for University</span>
+        </h1>
+        <p class="mt-6 text-lg text-slate-600 max-w-xl">
+          นักเรียนโรงเรียนสารสิทธิ์พิทยาลัย จังหวัดราชบุรี มุ่งเข้าสู่ <b>คณะวิศวกรรมศาสตร์</b>
+          สาขา <b>วิศวกรรมคอมพิวเตอร์</b> มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ
+        </p>
+        <div class="mt-8 flex items-center gap-3 text-sm">
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand/10 text-brand"><span
+              class="h-2 w-2 rounded-full bg-brand"></span> Computer Engineering</span>
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-700">GPA (GPAX)
+            3.00</span>
+        </div>
+      </div>
+      <div class="order-first md:order-none">
+        <div class="relative aspect-[4/3] rounded-3xl bg-white/70 p-3 shadow-soft border border-white overflow-hidden">
+          <div
+            class="h-full w-full rounded-2xl bg-gradient-to-br from-brand-2 to-white grid place-items-center text-center relative has-watermark">
+            <img src="assets/images/picture/Profile.png" alt="Profile" class="cursor-pointer"
+              onclick="openLightbox('assets/images/picture/Profile.png')" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold text-slate-900">ประวัติส่วนตัว</h2>
+      <div class="mt-2 h-1 w-14 rounded bg-[var(--brand)]/30"></div>
+
+      <p class="mt-4 text-slate-600 leading-relaxed">
+        ผมชื่อ <b>นายจิรายุ ชิยานุวัฒน์</b> (ไอซ์) สนใจเทคโนโลยีและการพัฒนาซอฟต์แวร์ ชอบเรียนรู้สิ่งใหม่ ลงมือทำจริง
+        ทั้งงานเว็บไซต์ งานเขียนโปรแกรม และการทำงานเป็นทีม ผ่านกิจกรรมต่าง ๆ ที่ช่วยฝึกความคิดเชิงวิเคราะห์และการสื่อสาร
+      </p>
+
+      <div class="mt-6 grid md:grid-cols-3 gap-6">
+        <!-- การ์ด: ข้อมูลโดยย่อ -->
+        <div
+          class="group rounded-2xl bg-white p-5 shadow-soft border border-slate-100 hover:-translate-y-1 hover:shadow-lg hover:border-[var(--brand)]/40 transition-all duration-300">
+          <div class="flex items-center gap-2">
+            <i class="ri-id-card-line text-[var(--brand)] text-xl" aria-hidden="true"></i>
+            <h3 class="font-semibold text-slate-900">ข้อมูลโดยย่อ</h3>
+          </div>
+          <ul class="mt-3 space-y-2 text-sm">
+            <li class="flex items-center gap-2"><i class="ri-calendar-line text-[var(--brand)]"
+                aria-hidden="true"></i><span><b>วันเกิด:</b> 11 มิ.ย. 2550 (อายุ 18 ปี)</span></li>
+            <li class="flex items-center gap-2"><i class="ri-school-line text-[var(--brand)]"
+                aria-hidden="true"></i><span><b>โรงเรียน:</b> โรงเรียนสารสิทธิ์พิทยาลัย</span></li>
+            <li class="flex items-center gap-2"><i class="ri-flask-line text-[var(--brand)]"
+                aria-hidden="true"></i><span><b>แผนการเรียน:</b> วิทย์–คณิต</span></li>
+            <li class="flex items-center gap-2"><i class="ri-bar-chart-2-line text-[var(--brand)]"
+                aria-hidden="true"></i><span><b>GPAX (คาดการณ์):</b> ประมาณ 3.00</span></li>
+            <li class="flex items-center gap-2"><i class="ri-map-pin-2-line text-[var(--brand)]"
+                aria-hidden="true"></i><span><b>ที่อยู่:</b> อ.ท่ายาง จ.เพชรบุรี</span></li>
+          </ul>
+        </div>
+
+        <!-- การ์ด: ความสนใจ -->
+        <div
+          class="group rounded-2xl bg-white p-5 shadow-soft border border-slate-100 hover:-translate-y-1 hover:shadow-lg hover:border-[var(--brand)]/40 transition-all duration-300">
+          <div class="flex items-center gap-2">
+            <i class="ri-lightbulb-flash-line text-[var(--brand)] text-xl" aria-hidden="true"></i>
+            <h3 class="font-semibold text-slate-900">ความสนใจ</h3>
+          </div>
+          <ul class="mt-3 grid grid-cols-2 gap-2 text-sm">
+            <li class="px-3 py-1 rounded-lg bg-brand/10 text-brand inline-flex items-center gap-2"><i
+                class="ri-code-line" aria-hidden="true"></i> Web Dev</li>
+            <li class="px-3 py-1 rounded-lg bg-brand/10 text-brand inline-flex items-center gap-2"><i
+                class="ri-cpu-line" aria-hidden="true"></i> Programming</li>
+            <li class="px-3 py-1 rounded-lg bg-brand/10 text-brand inline-flex items-center gap-2"><i
+                class="ri-layout-2-line" aria-hidden="true"></i> UI/UX</li>
+            <li class="px-3 py-1 rounded-lg bg-brand/10 text-brand inline-flex items-center gap-2"><i
+                class="ri-team-line" aria-hidden="true"></i> Community</li>
+          </ul>
+        </div>
+
+        <!-- การ์ด: ทักษะหลัก -->
+        <div
+          class="group rounded-2xl bg-white p-5 shadow-soft border border-slate-100 hover:-translate-y-1 hover:shadow-lg hover:border-[var(--brand)]/40 transition-all duration-300">
+          <div class="flex items-center gap-2">
+            <i class="ri-tools-line text-[var(--brand)] text-xl" aria-hidden="true"></i>
+            <h3 class="font-semibold text-slate-900">ทักษะหลัก</h3>
+          </div>
+          <ul class="mt-3 space-y-2 text-sm">
+            <li class="flex items-center gap-2"><i class="ri-html5-line text-[var(--brand)]"
+                aria-hidden="true"></i><span>HTML • CSS • Tailwind</span></li>
+            <li class="flex items-center gap-2"><i class="ri-javascript-line text-[var(--brand)]"
+                aria-hidden="true"></i><span>JavaScript / TypeScript (พื้นฐาน)</span></li>
+            <li class="flex items-center gap-2"><i class="ri-brush-line text-[var(--brand)]"
+                aria-hidden="true"></i><span>Canva / Photoshop</span></li>
+            <li class="flex items-center gap-2"><i class="ri-group-line text-[var(--brand)]"
+                aria-hidden="true"></i><span>สื่อสารและทำงานเป็นทีม</span></li>
+            <li class="flex items-center gap-2"><i class="ri-lightbulb-line text-[var(--brand)]"
+                aria-hidden="true"></i><span>คิดเชิงวิเคราะห์ แก้ปัญหา</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" class="py-14 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-baseline justify-between">
+        <h2 class="text-2xl md:text-3xl font-bold text-slate-900">ประวัติการศึกษา</h2>
+      </div>
+      <div class="mt-2 h-1 w-14 rounded bg-[var(--brand)]/30"></div>
+
+      <div class="mt-6 grid md:grid-cols-3 gap-5">
+        <div
+          class="rounded-2xl bg-white p-5 shadow-soft border border-slate-100 hover:scale-105 hover:border-brand/30 transition-all duration-300">
+          <div class="text-xs uppercase tracking-widest text-slate-500">ประถมศึกษา 2557–2562</div>
+          <div class="mt-2 font-semibold">โรงเรียนสารสิทธิ์พิทยาลัย</div>
+          <div class="mt-3 flex justify-center">
+            <img src="assets/images/Logo/SJLG.png" alt="School Logo" class="w-[120px] h-[120px] object-contain"
+              loading="lazy" />
+          </div>
+        </div>
+        <div
+          class="rounded-2xl bg-white p-5 shadow-soft border border-slate-100 hover:scale-105 hover:border-brand/30 transition-all duration-300">
+          <div class="text-xs uppercase tracking-widest text-slate-500">มัธยมศึกษาตอนต้น 2563–2565</div>
+          <div class="mt-2 font-semibold">โรงเรียนราชราษฎร์บำรุง</div>
+          <div class="mt-3 flex justify-center">
+            <img src="assets/images/Logo/RR.png" alt="School Logo" class="w-[120px] h-[120px] object-contain"
+              loading="lazy" />
+          </div>
+        </div>
+        <div
+          class="rounded-2xl bg-white p-5 shadow-soft border border-slate-100 hover:scale-105 hover:border-brand/30 transition-all duration-300">
+          <div class="text-xs uppercase tracking-widest text-slate-500">มัธยมศึกษาตอนปลาย 2566–2568</div>
+          <div class="mt-2 font-semibold">โรงเรียนสารสิทธิ์พิทยาลัย – GPAX 3.00</div>
+          <div class="mt-3 flex justify-center">
+            <img src="assets/images/Logo/SJLG.png" alt="School Logo" class="w-[120px] h-[120px] object-contain"
+              loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold text-slate-900">ทักษะ & ความสามารถ</h2>
+      <div class="mt-2 h-1 w-14 rounded bg-[var(--brand)]/30"></div>
+
+      <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div
+          class="group rounded-2xl bg-white p-5 shadow-soft border border-slate-100 hover:-translate-y-1 hover:shadow-xl hover:border-[var(--brand)]/50 transition duration-300">
+          <div class="h-1 w-full bg-gradient-to-r from-[var(--brand)]/70 to-amber-400/60 rounded mb-3"></div>
+          <div class="flex items-center gap-3 mb-2">
+            <div
+              class="w-10 h-10 flex items-center justify-center rounded-full bg-[var(--brand)]/10 text-[var(--brand)]">
+              <i class="ri-html5-line text-xl" aria-hidden="true"></i>
+            </div>
+            <h3 class="font-semibold text-slate-900">Front-end Basics</h3>
+          </div>
+          <p class="text-sm text-slate-600">HTML, CSS, Tailwind, Responsive</p>
+        </div>
+
+        <div
+          class="group rounded-2xl bg-white p-5 shadow-soft border border-slate-100 hover:-translate-y-1 hover:shadow-xl hover:border-[var(--brand)]/50 transition duration-300">
+          <div class="h-1 w-full bg-gradient-to-r from-[var(--brand)]/70 to-blue-400/60 rounded mb-3"></div>
+          <div class="flex items-center gap-3 mb-2">
+            <div
+              class="w-10 h-10 flex items-center justify-center rounded-full bg-[var(--brand)]/10 text-[var(--brand)]">
+              <i class="ri-code-s-slash-line text-xl" aria-hidden="true"></i>
+            </div>
+            <h3 class="font-semibold text-slate-900">Programming</h3>
+          </div>
+          <p class="text-sm text-slate-600">JavaScript/TypeScript (พื้นฐาน), การคิดเป็นขั้นตอน</p>
+        </div>
+
+        <div
+          class="group rounded-2xl bg-white p-5 shadow-soft border border-slate-100 hover:-translate-y-1 hover:shadow-xl hover:border-[var(--brand)]/50 transition duration-300">
+          <div class="h-1 w-full bg-gradient-to-r from-[var(--brand)]/70 to-pink-400/60 rounded mb-3"></div>
+          <div class="flex items-center gap-3 mb-2">
+            <div
+              class="w-10 h-10 flex items-center justify-center rounded-full bg-[var(--brand)]/10 text-[var(--brand)]">
+              <i class="ri-brush-line text-xl" aria-hidden="true"></i>
+            </div>
+            <h3 class="font-semibold text-slate-900">Design Tools</h3>
+          </div>
+          <p class="text-sm text-slate-600">Canva, PowerPoint, Photoshop (พื้นฐาน)</p>
+        </div>
+
+        <div
+          class="group rounded-2xl bg-white p-5 shadow-soft border border-slate-100 hover:-translate-y-1 hover:shadow-xl hover:border-[var(--brand)]/50 transition duration-300">
+          <div class="h-1 w-full bg-gradient-to-r from-[var(--brand)]/70 to-emerald-400/60 rounded mb-3"></div>
+          <div class="flex items-center gap-3 mb-2">
+            <div
+              class="w-10 h-10 flex items-center justify-center rounded-full bg-[var(--brand)]/10 text-[var(--brand)]">
+              <i class="ri-team-line text-xl" aria-hidden="true"></i>
+            </div>
+            <h3 class="font-semibold text-slate-900">Soft Skills</h3>
+          </div>
+          <p class="text-sm text-slate-600">ทำงานเป็นทีม, สื่อสาร, แก้ปัญหา, วินัย</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACTIVITIES -->
+  <section id="activities" class="py-14 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-baseline justify-between">
+        <h2 class="text-2xl md:text-3xl font-bold text-slate-900">กิจกรรม</h2>
+        <span class="text-sm text-slate-500">ปัดเพื่อเลื่อนรูป</span>
+      </div>
+      <div id="activitiesGrid" class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATES -->
+  <section id="certificates" class="py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-baseline justify-between">
+        <h2 class="text-2xl md:text-3xl font-bold text-slate-900">ผลงาน / เกียรติบัตร</h2>
+        <span class="text-sm text-slate-500">คลิกการ์ดเพื่อดูภาพ</span>
+      </div>
+      <div class="mt-2 h-1 w-14 rounded bg-[var(--brand)]/30"></div>
+
+      <div id="certGrid" class="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <dialog id="lightbox" class="backdrop:bg-black/60 p-0 rounded-xl w-[90vw] md:w-[70vw]">
+    <img id="lightboxImg" alt="preview" class="w-full h-auto rounded-xl" />
+  </dialog>
+
+  <!-- SOP -->
+  <section id="sop" class="py-14 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold text-slate-900">Statement of Purpose (SOP)</h2>
+      <div class="mt-2 h-1 w-14 rounded bg-[var(--brand)]/30"></div>
+      <div class="mt-6 rounded-2xl bg-white p-6 border border-slate-200 shadow-soft leading-8 text-slate-700">
+        <p>
+          กระผมนายจิรายุ ชิยานุวัฒน์ กำลังศึกษาชั้นมัธยมตอนปลาย ชั้นปีที่ 6 ที่โรงเรียนสารสิทธิ์พิทยาลัย จังหวัดราชบุรี
+          มีความสนใจด้านคอมพิวเตอร์มาตั้งแต่เด็ก โดยเฉพาะช่วงโควิด-19 ที่ได้ใช้คอมพิวเตอร์เครื่องแรก
+          ทำให้เริ่มเรียนรู้การตั้งค่าระบบ การพูดคุยกับ Developer ของเกมเซิร์ฟเวอร์ รวมถึงการเขียนเว็บและทำกราฟิก
+          นอกจากด้านเทคโนโลยี ผมยังเข้าร่วมกิจกรรมต่าง ๆ เช่น เชียร์หลีดเดอร์ สตาฟฟ์ จิตอาสา และการเป็นผู้นำ
+          ซึ่งช่วยพัฒนาทักษะการทำงานเป็นทีมและการแก้ปัญหาเฉพาะหน้า ผมตั้งใจจะเข้าศึกษาต่อ คณะวิศวกรรมศาสตร์
+          สาขาวิศวกรรมคอมพิวเตอร์ มหาวิทยาลัยพระจอมเกล้าพระนครเหนือ
+          เพราะเชื่อว่าจะช่วยพัฒนาศักยภาพให้พร้อมสู่การทำงานในอนาคต โดยมุ่งสู่การเป็นวิศวกรคอมพิวเตอร์หรือโปรแกรมเมอร์
+          และพร้อมเผชิญทุกความท้าทายเพื่อพัฒนาตนเองอย่างเต็มที่
+        </p>
+        <p class="mt-4">ขอบคุณครับ <br>นายจิรายุ ชิยานุวัฒน์</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="py-14 scroll-mt-20">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold text-slate-900">ติดต่อ</h2>
+      <div class="mt-2 h-1 w-14 rounded bg-[var(--brand)]/30"></div>
+      <p class="mt-3 text-slate-600">กด “คัดลอก” เพื่อคัดลอกข้อมูลติดต่อ</p>
+
+      <div class="mt-6">
+        <div class="rounded-2xl bg-white p-6 border border-slate-200 shadow-soft">
+          <ul class="space-y-4 text-slate-700">
+            <li class="flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3">
+                <i class="ri-phone-fill w-8 h-8 rounded-lg bg-brand/10 text-brand grid place-items-center"
+                  aria-hidden="true"></i>
+                <span>062-104-1275</span>
+              </div>
+              <button class="text-xs px-2 py-1 rounded bg-slate-100 hover:bg-slate-200"
+                data-copy="0621041275">คัดลอก</button>
+            </li>
+
+            <li class="flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3">
+                <i class="ri-mail-fill w-8 h-8 rounded-lg bg-brand/10 text-brand grid place-items-center"
+                  aria-hidden="true"></i>
+                <span>jirayu.chiyanuwat01@gmail.com</span>
+              </div>
+              <button class="text-xs px-2 py-1 rounded bg-slate-100 hover:bg-slate-200"
+                data-copy="jirayu.chiyanuwat01@gmail.com">คัดลอก</button>
+            </li>
+
+            <li class="flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3">
+                <i class="ri-facebook-fill w-8 h-8 rounded-lg bg-brand/10 text-brand grid place-items-center"
+                  aria-hidden="true"></i>
+                <span>Jirayu Chiyanuwat</span>
+              </div>
+              <button class="text-xs px-2 py-1 rounded bg-slate-100 hover:bg-slate-200"
+                data-copy="Jirayu Chiyanuwat">คัดลอก</button>
+            </li>
+
+            <li class="flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3">
+                <i class="ri-line-line w-8 h-8 rounded-lg bg-brand/10 text-brand grid place-items-center"
+                  aria-hidden="true"></i>
+                <span>ice27369</span>
+              </div>
+              <button class="text-xs px-2 py-1 rounded bg-slate-100 hover:bg-slate-200"
+                data-copy="ice27369">คัดลอก</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-10 border-t border-slate-200 bg-white">
+    <div class="max-w-6xl mx-auto px-4 text-sm text-slate-500 flex flex-col items-center gap-4 text-center">
+      <p>© <span id="year"></span> Jirayu Chiyanuwat • Portfolio</p>
+      <div class="flex gap-4">
+        <a href="tel:0621041275" aria-label="โทรศัพท์"
+          class="w-10 h-10 flex items-center justify-center rounded-full bg-emerald-500 text-white hover:bg-emerald-600 hover:scale-110 transition"><i
+            class="ri-phone-fill text-xl leading-none" aria-hidden="true"></i></a>
+        <a href="mailto:jirayu.chiyanuwat01@gmail.com" aria-label="อีเมล"
+          class="w-10 h-10 flex items-center justify-center rounded-full bg-indigo-500 text-white hover:bg-indigo-600 hover:scale-110 transition"><i
+            class="ri-mail-fill text-xl leading-none" aria-hidden="true"></i></a>
+        <a href="https://www.facebook.com/jirayu.chyanuwat" target="_blank" rel="noopener" aria-label="Facebook"
+          class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600 text-white hover:bg-blue-700 hover:scale-110 transition"><i
+            class="ri-facebook-fill text-xl leading-none" aria-hidden="true"></i></a>
+        <a href="https://line.me/ti/p/lg5dPa6zS4" target="_blank" rel="noopener" aria-label="Line"
+          class="w-10 h-10 flex items-center justify-center rounded-full bg-green-500 text-white hover:bg-green-600 hover:scale-110 transition"><i
+            class="ri-line-line text-xl leading-none" aria-hidden="true"></i></a>
+      </div>
+      <p class="text-xs text-slate-400">Made with ❤️ by Namkheang</p>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button id="backToTop"
+    class="fixed bottom-5 right-5 hidden rounded-full bg-slate-900 text-white h-11 w-11 shadow-soft hover:bg-slate-800"
+    aria-label="กลับขึ้นด้านบน">↑</button>
+
+  <script>
+    // ====== DATA ======
+    const activities = [
+      { title: 'การสร้างนวัตกรรมอัจฉริยะและสมองกลฝังตัว', desc: 'เข้าร่วมอบรมเชิงปฏิบัติการ “การสร้างนวัตกรรมอัจฉริยะและสมองกลฝังตัว” เพื่อพัฒนาทักษะด้านเทคโนโลยีและวิทยาการคอมพิวเตอร์ โดยได้ฝึกปฏิบัติจริงในห้องทดลองวิศวกรรมไฟฟ้า คณะวิศวกรรมศาสตร์ มศว องครักษ์', img: 'assets/images/picture/image.png' },
+      { title: 'เพิ่มทักษะเทคโนโลยีสมัยใหม่ที่จำเป็นสำหรับชีวิตในโลกยุคดิจิทัล', desc: 'เข้าร่วมอบรมเชิงปฎิบัติการในโครงการ "เพิ่มทักษะเทคโนโลยีสมัยใหม่ที่จำเป็นสำหรับชีวิตในโลกยุคดิจิทัล" ณ ห้องประชุม 114 คณะวิศวกรรมศาสตร์ มหาวิทยาลัยมหิดล', img: 'assets/images/picture/image.png' },
+      { title: 'เข้าศึกษาแหล่งเรียนรู้ด้านวิศวกรรมศาสตร์', desc: 'ศึกษาดูงานและเรียนรู้เทคโนโลยีด้านวิศวกรรม ณ ม.เทคโนโลยีพระจอมเกล้าพระนครเหนือ เพื่อเปิดโลกทัศน์และเสริมความรู้ทางวิทยาศาสตร์และเทคโนโลยี', img: 'assets/images/picture/image.png' },
+      { title: 'การเป็นเชียร์ลีดเดอร์ในงานกีฬาสีของโรงเรียน', desc: 'เข้าร่วมเป็นเชียร์ลีดเดอร์ในงานกีฬาสี ปีการศึกษา 2566 เสริมสร้างทักษะการทำงานเป็นทีม ความคิดสร้างสรรค์ และความสามัคคีในหมู่เพื่อนนักเรียน', img: 'assets/images/picture/image.png' },
+      { title: 'ออกแบบเสื้อสตาฟฟ์กีฬาสีโรงเรียน', desc: 'ออกแบบเสื้อสตาฟกีฬาสี โดยใช้โปรแกรม Photoshop ฝึกการใช้เครื่องมือออกแบบ และการนำเสนอผลงานเชิงสร้างสรรค์', img: 'assets/images/picture/image.png' },
+      { title: 'กิจกรรมชุมนุม อาชีพจากภูมิปัญญาท้องถิ่น <br> บูรณาการปรัชญาของเศรษฐกิจพอเพียง', desc: 'เข้าร่วมโครงงาน “จักสานผักตบชวา” แปรรูปเป็นผลิตภัณฑ์ เช่น กระเป๋า ตะกร้า ลดปัญหาสิ่งแวดล้อม สร้างรายได้ ใช้ทรัพยากรอย่างคุ้มค่า พร้อมเรียนรู้ทีมเวิร์กและการอนุรักษ์วัฒนธรรมท้องถิ่น', img: 'assets/images/picture/image.png' },
+      { title: 'รวมพลังสร้างสัปปายะสู่วัดด้วยวิถี 5ส. (Bing Cleaning Day)', desc: 'เข้าร่วมกิจกรรมจิตอาสาพัฒนาสภาพแวดล้อมวัดให้สะอาดและเป็นระเบียบ', img: 'assets/images/picture/image.png' },
+      { title: 'กิจกรรมชุมนุม “อาชีพอิสระ”', desc: 'ร่วมคิดเมนู คำนวณต้นทุน–กำไร จัดซื้อวัตถุดิบ และทดลองจำหน่ายจริงในโรงเรียน เรียนรู้การวางแผนและบริหารจัดการ', img: 'assets/images/picture/image.png' },
+      { title: '7th SJ Film Festival 2024', desc: 'ร่วมผลิตภาพยนตร์สั้น รับผิดชอบบท กำกับ ถ่ายทำ และตัดต่อ เรียนรู้การทำงานเป็นทีม และทักษะดิจิทัล', img: 'assets/images/picture/image.png' },
+    ];
+
+    const certificates = [
+      { img: 'assets/images/certificate/Buddha.png', caption: 'ค่ายพุทธบุตร' },
+      { img: 'assets/images/certificate/SJ.png', caption: 'กิจกรรมเด่น' },
+      { img: 'assets/images/certificate/Summer.png', caption: 'เกียรติบัตรกิจกรรมวิชาการ' },
+      { img: 'assets/images/certificate/SWU.png', caption: 'โครงการพัฒนาทักษะ' },
+      { img: 'assets/images/certificate/MU.png', caption: 'เพิ่มทักษะเทคโนโลยีสมัยใหม่' },
+      { img: 'assets/images/certificate/Sumsung.png', caption: 'Solve for Tomorrow' },
+      { img: 'assets/images/certificate/borntodev.png', caption: 'Fundamental Web Dev' },
+      { img: 'assets/images/certificate/AI.png', caption: 'AI' },
+      { img: 'assets/images/certificate/BOTNOI.png', caption: 'BOTNOI' },
+      { img: 'assets/images/certificate/CiRA.png', caption: 'CiRA' },
+      { img: 'assets/images/certificate/TYPOON.png', caption: 'TYPOON' },
+      { img: 'assets/images/certificate/JK.png', caption: 'JK' },
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const actWrap = document.getElementById('activitiesGrid');
+      const certWrap = document.getElementById('certGrid');
+
+      // Activities (หนึ่งรอบเท่านั้น)
+      activities.forEach((a, idx) => {
+        const imgs = Array.isArray(a.imgs) && a.imgs.length ? a.imgs : [a.img];
+        const splideId = `splide-activity-${idx}`;
+
+        const slides = imgs.map(src => `
+          <li class="splide__slide">
+            <img src="${src}" alt="${a.title}" class="w-full h-full object-cover rounded-lg" onclick="openLightbox('${src}')"/>
+          </li>
+        `).join('');
+
+        const el = document.createElement('article');
+        el.className = 'group rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-soft';
+        el.innerHTML = `
+          <div class="splide aspect-[4/3] touch-hint" id="${splideId}">
+            <div class="splide__track">
+              <ul class="splide__list">${slides}</ul>
+            </div>
+            <div class="swipe-hint" aria-hidden="true">
+              <span class="swipe-chev">‹</span><span>ปัดเพื่อดูรูป</span><span class="swipe-chev">›</span>
+            </div>
+          </div>
+          <div class="p-5">
+            <h3 class="font-semibold">${a.title}</h3>
+            <p class="mt-2 text-sm text-slate-600">${a.desc}</p>
+          </div>`;
+        actWrap.appendChild(el);
+
+        const s = new Splide(`#${splideId}`, {
+          type: 'loop', autoplay: true, interval: 3200, arrows: true, pagination: true, drag: true
+        }).mount();
+
+        const hint = el.querySelector('.swipe-hint');
+        const wrap = el.querySelector('.splide');
+        const hideHint = () => { hint?.classList.add('hide'); wrap?.classList.remove('touch-hint'); };
+        s.on('move drag', hideHint); hint?.addEventListener('click', hideHint); setTimeout(hideHint, 4000);
+      });
+
+      // Certificates
+      certificates.forEach(c => {
+        const el = document.createElement('button');
+        el.className = 'group rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-soft text-left hover:border-brand/30 transition';
+        el.innerHTML = `
+          <div class="aspect-[4/3] overflow-hidden">
+            <img src="${c.img}" alt="${c.caption}" class="h-full w-full object-cover group-hover:scale-105 transition"/>
+          </div>
+          <div class="p-3">
+            <div class="text-sm text-center font-medium text-slate-700 group-hover:text-[var(--brand)]">${c.caption}</div>
+          </div>`;
+        el.addEventListener('click', () => openLightbox(c.img));
+        certWrap.appendChild(el);
+      });
+
+      // Lightbox
+      const dlg = document.getElementById('lightbox');
+      const img = document.getElementById('lightboxImg');
+      window.openLightbox = src => { img.src = src; dlg.showModal(); };
+      dlg?.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+
+      // คัดลอก
+      document.querySelectorAll('[data-copy]').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const text = btn.getAttribute('data-copy');
+          try {
+            await navigator.clipboard.writeText(text);
+            const old = btn.textContent; btn.textContent = 'คัดลอกแล้ว'; setTimeout(() => btn.textContent = old, 1200);
+          } catch (e) { console.warn(e); }
+        });
+      });
+
+      // back-to-top & year
+      const topBtn = document.getElementById('backToTop');
+      window.addEventListener('scroll', () => { if (window.scrollY > 480) topBtn.classList.remove('hidden'); else topBtn.classList.add('hidden'); });
+      topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+      document.getElementById('year').textContent = new Date().getFullYear();
+    });
+  </script>
+
+  <!-- PDF Preview Modal -->
+  <dialog id="pdfDialog" class="no-print backdrop:bg-black/60 p-0 rounded-xl w-[95vw] md:w-[80vw]">
+    <div class="bg-white rounded-xl overflow-hidden shadow-soft">
+      <div class="flex items-center justify-between px-4 py-3 border-b border-slate-200">
+        <div class="flex items-center gap-2 text-slate-800">
+          <i class="ri-file-pdf-line text-slate-800 text-lg"></i>
+          <span class="font-medium">Portfolio (PDF)</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <a href="assets/pdf/Portfolio.pdf" download
+            class="inline-flex items-center gap-2 text-sm px-3 py-1.5 rounded-lg bg-brand text-white hover:bg-slate-800">
+            <i class="ri-download-2-line"></i> ดาวน์โหลด
+          </a>
+          <a href="assets/pdf/Portfolio.pdf" target="_blank" rel="noopener"
+            class="inline-flex items-center gap-2 text-sm px-3 py-1.5 rounded-lg bg-brand text-white hover:bg-slate-800">
+            <i class="ri-external-link-line"></i> เปิดแท็บใหม่
+          </a>
+          <button onclick="closePdfPreview()"
+            class="ml-2 w-8 h-8 grid place-items-center rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600">
+            <i class="ri-close-line text-lg"></i>
+          </button>
+        </div>
+      </div>
+      <div class="w-full h-[75vh] bg-slate-50">
+        <iframe id="pdfFrame" src="" class="w-full h-full" loading="lazy"></iframe>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    const PDF_PATH = 'assets/pdf/Portfolio.pdf';
+    function openPdfPreview() {
+      const dlg = document.getElementById('pdfDialog'); const frame = document.getElementById('pdfFrame');
+      frame.src = PDF_PATH; dlg.showModal();
+    }
+    function closePdfPreview() {
+      const dlg = document.getElementById('pdfDialog'); const frame = document.getElementById('pdfFrame');
+      dlg.close(); frame.src = '';
+    }
+  </script>
+</body>
+
+</html>
