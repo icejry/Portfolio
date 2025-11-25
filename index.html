@@ -676,6 +676,137 @@
       }
     }
   </style>
+
+<style id="ios-premium-global">
+/* ===== iOS Premium Full Website ===== */
+
+/* Smooth global background gradient (continuous) */
+/* Global glass cards */
+/* Hover elevation */
+/* iOS buttons */
+/* Navbar glass */
+/* Footer */
+/* Smooth transitions */
+* {
+  transition: background .3s ease, box-shadow .3s ease, transform .3s ease;
+}
+
+</style>
+
+<style id="ios-dark-aurora">
+html.dark body{
+  background:
+    radial-gradient(1400px at 50% -20%, rgba(80,0,120,0.45), transparent 70%),
+    radial-gradient(1200px at -10% 60%, rgba(0,120,255,0.25), transparent 70%),
+    radial-gradient(1200px at 110% 70%, rgba(0,255,180,0.22), transparent 70%),
+    #0a0a0f;
+  backdrop-filter: blur(40px);
+}
+
+/* dark glass */
+html.dark .rounded-2xl, html.dark .glass, html.dark .card{
+  background: rgba(20,20,30,0.55) !important;
+  backdrop-filter: blur(26px) saturate(160%) !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  box-shadow: 
+     0 4px 14px rgba(0,0,0,0.6),
+     0 10px 28px rgba(0,0,0,0.5) !important;
+}
+
+/* dark navbar */
+html.dark nav{
+  background: rgba(20,20,30,0.55) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+  backdrop-filter: blur(24px) !important;
+}
+
+/* dark buttons */
+html.dark button, html.dark .copy-btn{
+  background: rgba(40,40,55,0.55) !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+}
+
+</style>
+
+<style>
+html.dark .pill-copy{
+  color: #f0f0f0 !important;
+  border-color: #888 !important;
+}
+</style>
+
+<style>
+html:not(.dark) section:nth-of-type(1){background:linear-gradient(180deg,#fff7f7,#fff3ec);}
+html:not(.dark) section:nth-of-type(2){background:linear-gradient(180deg,#fff3ec,#fefaf5);}
+html:not(.dark) section:nth-of-type(3){background:linear-gradient(180deg,#fefaf5,#f6f0ff);}
+html:not(.dark) section:nth-of-type(4){background:linear-gradient(180deg,#f6f0ff,#eef6ff);}
+html:not(.dark) section:nth-of-type(5){background:linear-gradient(180deg,#eef6ff,#f5fff8);}
+html:not(.dark) section:nth-of-type(6){background:linear-gradient(180deg,#f5fff8,#fffdf5);}
+html:not(.dark) section:nth-of-type(7){background:linear-gradient(180deg,#fffdf5,#fffafc);}
+html:not(.dark) section:nth-of-type(8){background:linear-gradient(180deg,#fffafc,#ffffff);}
+html:not(.dark) footer{background:transparent;}
+</style>
+
+<style>
+/* copied state for contact pill buttons */
+.pill-copy.copied {
+  font-weight: 600;
+}
+html.dark .pill-copy.copied {
+  color: #fefce8 !important; /* warm light */
+  background: rgba(22,163,74,0.25) !important; /* emerald tint */
+  border-color: rgba(74,222,128,0.9) !important;
+}
+html:not(.dark) .pill-copy.copied {
+  color: #166534 !important;
+  background: rgba(187,247,208,0.8) !important;
+  border-color: rgba(22,163,74,0.9) !important;
+}
+</style>
+
+<style>
+.copy-toast {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  padding: 12px 20px;
+  background: rgba(0,0,0,0.75);
+  color: white;
+  font-size: 16px;
+  border-radius: 12px;
+  backdrop-filter: blur(12px);
+  display: none;
+}
+.copy-toast.show {
+  display: block;
+}
+</style>
+
+
+<style>
+#copyToast{
+ position:fixed;
+ top:50%;
+ left:50%;
+ transform:translate(-50%,-50%);
+ background:rgba(0,0,0,0.75);
+ color:#fff;
+ padding:12px 20px;
+ border-radius:14px;
+ font-size:16px;
+ z-index:9999;
+ display:none;
+ backdrop-filter:blur(10px);
+}
+#copyToast.show{display:block;}
+</style>
+
+<style>
+#copyToast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.75);color:#fff;padding:12px 20px;border-radius:14px;z-index:9999;display:none;backdrop-filter:blur(10px);}
+#copyToast.show{display:block;}
+</style>
 </head>
 
 <body class="text-slate-800">
@@ -1225,30 +1356,12 @@
 
           </ul>
 
-          <!-- Toast -->
-          <div id="toast">✔ คัดลอกสำเร็จ</div>
-
-          <script>
-            document.querySelectorAll('.copy-btn').forEach(btn => {
-              btn.addEventListener('click', () => {
-                const text = btn.getAttribute('data-copy');
-                navigator.clipboard.writeText(text);
-
-                const toast = document.getElementById('toast');
-                toast.classList.add('show');
-
-                setTimeout(() => toast.classList.remove('show'), 1500);
-              });
-            });
-          </script>
+          
 
 
 
           <div class="pt-3 border-t border-slate-100 dark:border-slate-700 flex justify-end">
-            <button id="copyAllContacts"
-              class="text-xs px-3 py-1.5 rounded-lg bg-slate-900 text-white hover:bg-slate-800 dark:bg-slate-200 dark:text-slate-900 dark:hover:bg-white">
-              คัดลอกข้อมูลทั้งหมด
-            </button>
+            
           </div>
         </div>
       </div>
@@ -1264,14 +1377,7 @@
 
       <div class="flex flex-col items-center gap-2">
         <p>© <span id="year"></span> Jirayu Chiyanuwat • Portfolio</p>
-        <nav class="flex flex-wrap justify-center gap-4 text-[11px] text-slate-400 dark:text-slate-500">
-          <a href="#about" data-scroll class="hover:text-slate-700 dark:hover:text-slate-200">ประวัติส่วนตัว</a>
-          <a href="#education" data-scroll class="hover:text-slate-700 dark:hover:text-slate-200">การศึกษา</a>
-          <a href="#activities" data-scroll class="hover:text-slate-700 dark:hover:text-slate-200">กิจกรรม</a>
-          <a href="#certificates" data-scroll class="hover:text-slate-700 dark:hover:text-slate-200">เกียรติบัตร</a>
-          <a href="#sop" data-scroll class="hover:text-slate-700 dark:hover:text-slate-200">SOP</a>
-          <a href="#contact" data-scroll class="hover:text-slate-700 dark:hover:text-slate-200">ติดต่อ</a>
-        </nav>
+        
       </div>
 
       <div class="flex gap-4">
@@ -1737,8 +1843,14 @@
           try {
             await navigator.clipboard.writeText(text);
             const old = btn.textContent;
-            btn.textContent = 'คัดลอกแล้ว';
-            setTimeout(() => (btn.textContent = old), 1200);
+            
+// Show centered toast
+const toast = document.getElementById('copyToast');
+toast.classList.add('show');
+setTimeout(()=> toast.classList.remove('show'),1200);
+
+            btn.classList.add('copied');
+            setTimeout(() => { btn.textContent = old; btn.classList.remove('copied'); }, 1200);
           } catch (e) {
             console.warn(e);
           }
@@ -1887,6 +1999,21 @@
       </div>
     </div>
   </dialog>
+<div class="copy-toast" id="copyToast">คัดลอกสำเร็จ</div>
+<div id="copyToast">คัดลอกสำเร็จ</div>
+<div id='copyToast'>✔ คัดลอกสำเร็จ</div>
+
+<script>
+document.querySelectorAll('.copy-btn').forEach(btn=>{
+ btn.addEventListener('click',()=>{
+   const text=btn.getAttribute('data-copy');
+   navigator.clipboard.writeText(text);
+   const t=document.getElementById('copyToast');
+   t.classList.add('show');
+   setTimeout(()=>t.classList.remove('show'),1300);
+ });
+});
+</script>
 </body>
 
 </html>
